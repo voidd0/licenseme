@@ -215,3 +215,7 @@ MIT © [vøiddo](https://voiddo.com) — free forever, no asterisks.
 - Studio: https://voiddo.com
 - Issues: https://github.com/voidd0/licenseme/issues
 - Support: support@voiddo.com
+
+---
+
+Built by [vøiddo](https://voiddo.com/) — a small studio shipping AI-flavoured products, free dev tools, Chrome extensions and weird browser games.
