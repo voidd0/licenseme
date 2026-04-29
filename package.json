@@ -1,6 +1,6 @@
 {
   "name": "@v0idd0/licenseme",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "licenseme — LICENSE file generator + detector. 18 licenses (MIT, Apache-2.0, GPL-3, AGPL, MPL-2, LGPL-3, BSD 0/2/3, CC0, CC-BY, Unlicense, WTFPL, BSL, Zlib). SPDX-aware, detect existing, bump year, source-file headers. Free forever from vøiddo.",
   "main": "src/generator.js",
   "bin": {
@@ -44,9 +44,18 @@
     "node": ">=14"
   },
   "files": [
-    "bin",
-    "src",
-    "README.md",
-    "LICENSE"
-  ]
+    "bin/",
+    "src/",
+    "LICENSE",
+    "README.md"
+  ],
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "funding": {
+    "type": "individual",
+    "url": "https://voiddo.com/contact/"
+  }
 }
