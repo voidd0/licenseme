@@ -5,9 +5,13 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-A0573A.svg)](LICENSE)
 [![Node ≥14](https://img.shields.io/badge/node-%E2%89%A514-1F1A14)](package.json)
 
-**LICENSE file generator + detector.** Pick one of 18 open-source licenses, fill in your name and year, write `./LICENSE` — done. Or point it at an existing `LICENSE` and let it tell you *which* license you're actually shipping under.
+**[Homepage](https://tools.voiddo.com/licenseme/?ref=licenseme-readme)** · **[GitHub](https://github.com/voidd0/licenseme)** · **[npm](https://www.npmjs.com/package/@v0idd0/licenseme)** · **[All tools](https://tools.voiddo.com/?ref=licenseme-catalog-readme)** · **[Contact](mailto:support@voiddo.com)**
 
-Free forever gift from [vøiddo](https://voiddo.com).
+---
+
+**LICENSE file generator + detector.** Pick one of 18 open-source licenses, fill in your name and year, write `./LICENSE`, done. Or point it at an existing `LICENSE` and let it tell you *which* license you're actually shipping under.
+
+gift from [vøiddo](https://voiddo.com).
 
 ```
 $ licenseme mit -n "Jane Doe"
@@ -146,7 +150,7 @@ Typed what you remember, not what the SPDX id is? It's fine:
 
 The `SPDX-License-Identifier:` line is the canonical way to mark source files per [spdx.dev](https://spdx.dev). Automated scanners (REUSE, ClearlyDefined, npm packages like `license-checker`) read it directly.
 
-### Detection — SPDX first, fingerprint fallback
+### Detection: SPDX first, fingerprint fallback
 `--detect` runs two passes:
 1. Look for an explicit `SPDX-License-Identifier:` tag → 100% confidence.
 2. Tokenize the file, compare Jaccard similarity against every bundled template → confidence score.
@@ -154,7 +158,7 @@ The `SPDX-License-Identifier:` line is the canonical way to mark source files pe
 If confidence drops below 35%, it bails out instead of guessing. The source (`spdx-tag` vs `fingerprint`) is surfaced in the output so you can trust or double-check.
 
 ### Year bump
-`licenseme --update` walks the `Copyright (c) 2023 …` / `Copyright © 2023 …` line and turns it into `Copyright (c) 2023-2026 …`. Idempotent — if the year is already current, it's a no-op.
+`licenseme --update` walks the `Copyright (c) 2023 …` / `Copyright © 2023 …` line and turns it into `Copyright (c) 2023-2026 …`. Idempotent, if the year is already current, it's a no-op.
 
 ### JSON output
 Everything has a `--json` mode:
@@ -195,32 +199,19 @@ spdxId('agpl-3.0');    // "AGPL-3.0-only"
 list();                // [{ key, name, spdx, permissive }, ...]
 ```
 
-## From the same studio
-
-vøiddo builds sharp, free-forever CLIs for devs who are tired of paywalls:
-
-- [`@v0idd0/jsonyo`](https://voiddo.com/tools/jsonyo/) — JSON that yells at you when it's broken
-- [`@v0idd0/tokcount`](https://voiddo.com/tools/tokcount/) — token counter for 60+ LLMs
-- [`@v0idd0/ctxstuff`](https://voiddo.com/tools/ctxstuff/) — stuff a repo into an LLM context window
-- [`@v0idd0/promptdiff`](https://voiddo.com/tools/promptdiff/) — diff two prompts
-- [`@v0idd0/httpwut`](https://voiddo.com/tools/httpwut/) — HTTP debugger with phase timing
-- [`@v0idd0/gitstats`](https://voiddo.com/tools/gitstats/) — local git analytics (hotspots, bus-factor, streaks)
-
-Full catalog: [voiddo.com/tools](https://voiddo.com/tools/).
-
 ## License
 
-MIT © [vøiddo](https://voiddo.com) — free forever, no asterisks.
+MIT © [vøiddo](https://voiddo.com/?ref=licenseme-studio-readme), no asterisks.
 
 ## Links
 
-- Docs: https://voiddo.com/tools/licenseme/
+- Docs: https://tools.voiddo.com/licenseme/?ref=licenseme-docs-readme
 - Source: https://github.com/voidd0/licenseme
 - npm: https://npmjs.com/package/@v0idd0/licenseme
-- Studio: https://voiddo.com
+- Studio: https://voiddo.com/?ref=licenseme-studio-readme
 - Issues: https://github.com/voidd0/licenseme/issues
 - Support: support@voiddo.com
 
 ---
 
-Built by [vøiddo](https://voiddo.com/) — a small studio shipping AI-flavoured products, free dev tools, Chrome extensions and weird browser games.
+Maintained by v0idd0.

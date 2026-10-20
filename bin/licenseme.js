@@ -142,10 +142,19 @@ function cmdList(opts) {
 }
 
 function cmdDetect(opts) {
-  const target = path.resolve(opts.detect);
+  let target = path.resolve(opts.detect);
   if (!fs.existsSync(target)) {
-    console.error(`${RED}bruh. file not found: ${target}${RESET}`);
+    console.error(`${RED}file not found: ${target}${RESET}`);
     return 1;
+  }
+  if (fs.statSync(target).isDirectory()) {
+    const names = ['LICENSE', 'LICENSE.md', 'LICENSE.txt', 'COPYING', 'UNLICENSE'];
+    const found = names.map((n) => path.join(target, n)).find((f) => fs.existsSync(f));
+    if (!found) {
+      console.error(`${RED}no license file found in directory: ${target}${RESET}`);
+      return 1;
+    }
+    target = found;
   }
   const text = fs.readFileSync(target, 'utf8');
   const result = detect(text);

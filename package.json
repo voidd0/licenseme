@@ -1,7 +1,7 @@
 {
   "name": "@v0idd0/licenseme",
-  "version": "2.0.1",
-  "description": "licenseme — LICENSE file generator + detector. 18 licenses (MIT, Apache-2.0, GPL-3, AGPL, MPL-2, LGPL-3, BSD 0/2/3, CC0, CC-BY, Unlicense, WTFPL, BSL, Zlib). SPDX-aware, detect existing, bump year, source-file headers. Free forever from vøiddo.",
+  "version": "2.0.3",
+  "description": "Generate a LICENSE file from 18 licenses (MIT, Apache-2.0, GPL-3.0, AGPL-3.0, MPL-2.0, BSD and more), detect an existing license, bump the year and add source file headers.",
   "main": "src/generator.js",
   "bin": {
     "licenseme": "./bin/licenseme.js"
@@ -11,24 +11,21 @@
   },
   "keywords": [
     "license",
-    "licenses",
-    "generator",
-    "detect",
+    "license-generator",
+    "license-detector",
     "spdx",
+    "copyright-header",
     "mit",
     "apache",
     "gpl",
     "bsd",
-    "agpl",
-    "mpl",
     "cc0",
-    "creative-commons",
     "cli",
-    "voiddo"
+    "generator"
   ],
   "author": "vøiddo <support@voiddo.com> (https://voiddo.com)",
   "license": "MIT",
-  "homepage": "https://voiddo.com/tools/licenseme/",
+  "homepage": "https://tools.voiddo.com/licenseme/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/voidd0/licenseme.git"
@@ -44,15 +41,10 @@
     "node": ">=14"
   },
   "files": [
-    "bin/",
-    "src/",
-    "LICENSE",
-    "README.md"
-  ],
-  "os": [
-    "darwin",
-    "linux",
-    "win32"
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE"
   ],
   "funding": {
     "type": "individual",
