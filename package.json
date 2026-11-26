@@ -4,7 +4,7 @@
   "description": "Write a LICENSE file from 18 bundled licenses, detect the license of an existing project, bump the copyright year and print source file headers.",
   "main": "src/generator.js",
   "bin": {
-    "licenseme": "./bin/licenseme.js"
+    "licenseme": "bin/licenseme.js"
   },
   "scripts": {
     "test": "node test.js"
