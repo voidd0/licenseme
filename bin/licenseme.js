@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-// licenseme — LICENSE file generator + detector, free forever from vøiddo.
-// https://voiddo.com/tools/licenseme/
 
 const fs = require('fs');
 const path = require('path');
@@ -12,24 +10,29 @@ const {
   detect,
   updateYear,
 } = require('../src/generator');
-const { maybeShowPromo, getHelpFooter } = require('../src/promo');
 
 const pkg = require('../package.json');
 const args = process.argv.slice(2);
 
-const YELLOW = '\x1b[33m';
-const CYAN = '\x1b[36m';
-const GREEN = '\x1b[32m';
-const RED = '\x1b[31m';
-const DIM = '\x1b[2m';
-const RESET = '\x1b[0m';
+const COLOR = !process.env.NO_COLOR && process.stdout.isTTY;
+const YELLOW = COLOR ? '\x1b[33m' : '';
+const CYAN = COLOR ? '\x1b[36m' : '';
+const GREEN = COLOR ? '\x1b[32m' : '';
+const RED = COLOR ? '\x1b[31m' : '';
+const DIM = COLOR ? '\x1b[2m' : '';
+const RESET = COLOR ? '\x1b[0m' : '';
+
+function shortPath(p) {
+  const rel = path.relative(process.cwd(), p);
+  return rel && !rel.startsWith('..') && !path.isAbsolute(rel) ? rel : p;
+}
 
 function showHelp() {
   const permissive = list().filter((l) => l.permissive).map((l) => l.key).join(', ');
   const copyleft = list().filter((l) => !l.permissive).map((l) => l.key).join(', ');
   console.log(`
 ${YELLOW}licenseme${RESET} ${DIM}v${pkg.version}${RESET}
-${DIM}LICENSE generator + detector — free forever from vøiddo${RESET}
+${DIM}LICENSE generator + detector${RESET}
 
 ${CYAN}Usage:${RESET}
   licenseme <license> [options]
@@ -68,7 +71,7 @@ ${CYAN}Examples:${RESET}
   licenseme --list --json | jq '.[] | .spdx'
   licenseme mit --spdx                     ${DIM}# prints "MIT" and exits${RESET}
 
-${DIM}docs: https://voiddo.com/tools/licenseme/${RESET}${getHelpFooter()}
+${DIM}Docs and issues: https://github.com/voidd0/licenseme${RESET}
 `);
 }
 
@@ -178,7 +181,7 @@ function cmdDetect(opts) {
   console.log(`  SPDX:        ${result.spdx}`);
   console.log(`  Key:         ${result.key}`);
   console.log(`  Confidence:  ${confPct}%  ${DIM}(${result.source})${RESET}`);
-  console.log(`  Path:        ${target}`);
+  console.log(`  Path:        ${shortPath(target)}`);
   console.log();
   return 0;
 }
@@ -246,7 +249,7 @@ function cmdGenerate(opts) {
 
   const outPath = path.resolve(opts.output || 'LICENSE');
   fs.writeFileSync(outPath, content.endsWith('\n') ? content : content + '\n');
-  console.log(`  ${GREEN}✓${RESET} Wrote ${path.basename(outPath)} ${DIM}(${sid})${RESET} → ${outPath}`);
+  console.log(`  ${GREEN}✓${RESET} Wrote ${path.basename(outPath)} ${DIM}(${sid})${RESET} → ${shortPath(outPath)}`);
   return 0;
 }
 
@@ -276,7 +279,6 @@ function main() {
   }
 
   const exitCode = cmdGenerate(opts);
-  maybeShowPromo();
   return exitCode;
 }
 

@@ -1,38 +1,10 @@
 # licenseme
 
-[![npm version](https://img.shields.io/npm/v/@v0idd0/licenseme.svg?color=A0573A)](https://www.npmjs.com/package/@v0idd0/licenseme)
-[![npm downloads](https://img.shields.io/npm/dw/@v0idd0/licenseme.svg?color=1F1A14)](https://www.npmjs.com/package/@v0idd0/licenseme)
-[![License: MIT](https://img.shields.io/badge/license-MIT-A0573A.svg)](LICENSE)
-[![Node ≥14](https://img.shields.io/badge/node-%E2%89%A514-1F1A14)](package.json)
+Write a LICENSE file from 18 bundled licenses, or detect which license a project already has. Use it when starting a repository or checking an old one.
 
-**[Homepage](https://tools.voiddo.com/licenseme/?ref=licenseme-readme)** · **[GitHub](https://github.com/voidd0/licenseme)** · **[npm](https://www.npmjs.com/package/@v0idd0/licenseme)** · **[All tools](https://tools.voiddo.com/?ref=licenseme-catalog-readme)** · **[Contact](mailto:support@voiddo.com)**
-
----
-
-**LICENSE file generator + detector.** Pick one of 18 open-source licenses, fill in your name and year, write `./LICENSE`, done. Or point it at an existing `LICENSE` and let it tell you *which* license you're actually shipping under.
-
-gift from [vøiddo](https://voiddo.com).
-
-```
-$ licenseme mit -n "Jane Doe"
-  ✓ Wrote LICENSE (MIT) → /repo/LICENSE
-
-$ licenseme --detect ./LICENSE
-  License:     Apache License 2.0
-  SPDX:        Apache-2.0
-  Confidence:  98%  (fingerprint)
-```
-
-## Why licenseme
-
-`npm init` asks you to pick a license by name and dumps "MIT" into package.json without writing the actual `LICENSE` file. GitHub's "Add a license" button works but needs a browser. `choosealicense.com` is great at education but not at shelling.
-
-licenseme is a single binary that:
-- writes the **full SPDX text** of 18 open-source licenses,
-- emits **source-file copyright headers** (JS / Python / HTML / plain) with SPDX tags,
-- **detects** what license an existing `LICENSE` file is, via SPDX tag or token-fingerprint,
-- **bumps the copyright year** in an existing `LICENSE` (`2023` → `2023-2026`),
-- prints **SPDX identifiers** for your `package.json` / `pyproject.toml` / `Cargo.toml`.
+[![npm](https://img.shields.io/npm/v/@v0idd0/licenseme?color=00f6d0&labelColor=050914)](https://www.npmjs.com/package/@v0idd0/licenseme)
+[![test](https://github.com/voidd0/licenseme/actions/workflows/test.yml/badge.svg)](https://github.com/voidd0/licenseme/actions/workflows/test.yml)
+[![license](https://img.shields.io/badge/license-MIT-00f6d0?labelColor=050914)](LICENSE)
 
 ## Install
 
@@ -40,178 +12,109 @@ licenseme is a single binary that:
 npm install -g @v0idd0/licenseme
 ```
 
-Or one-shot with `npx`:
+Or run it once without installing: `npx @v0idd0/licenseme --help`. Needs Node.js 18 or newer. No dependencies.
 
-```bash
-npx -y @v0idd0/licenseme mit -n "Jane Doe"
+## Example
+
+Write an MIT license for one author into an empty directory, then detect it. Output from a real run on 2026-11-26:
+
+```console
+$ licenseme mit -n "Jane Doe" -y 2026
+  ✓ Wrote LICENSE (MIT) → LICENSE
+
+$ licenseme --detect
+
+  DETECTED
+  ────────
+  License:     MIT License
+  SPDX:        MIT
+  Key:         mit
+  Confidence:  98%  (fingerprint)
+  Path:        LICENSE
 ```
 
-## Quickstart
+List the bundled licenses.
 
-```bash
-# Write ./LICENSE
-licenseme mit -n "Jane Doe"
-licenseme apache-2.0 -n "Acme, Inc." -y 2026
+```console
+$ licenseme --list
 
-# Copyleft
-licenseme gpl-3.0 -n "Linus" --stdout
-licenseme agpl -n "SaaS Ltd" -o ./licenses/AGPL.txt
+Available licenses (18):
 
-# Print to stdout (no file write)
-licenseme isc -n "Jane" --stdout
-
-# Source-file header with SPDX tag
-licenseme mit -n "Jane" --header                             # jsblock (default)
-licenseme mit -n "Jane" --header --style hash                # python / shell
-licenseme mit -n "Jane" --header --style html                # html / markdown
-
-# Detect an existing LICENSE
-licenseme --detect                                           # defaults to ./LICENSE
-licenseme --detect ./vendor/some-lib/LICENSE
-
-# Update copyright year in place
-licenseme --update                    # bumps to current year
-licenseme --update -y 2027
-
-# List every bundled license
-licenseme --list
-licenseme --list --json | jq '.[] | select(.permissive == false)'
-
-# Get just the SPDX identifier
-licenseme mit --spdx          # prints "MIT"
-licenseme agpl --spdx         # prints "AGPL-3.0-only"
+  mit         permissive  MIT                 MIT License
+  apache      permissive  Apache-2.0          Apache License 2.0
+  isc         permissive  ISC                 ISC License
+  bsd3        permissive  BSD-3-Clause        BSD 3-Clause License
+  bsd2        permissive  BSD-2-Clause        BSD 2-Clause License
+  bsd0        permissive  0BSD                BSD Zero Clause License
+  unlicense   permissive  Unlicense           The Unlicense
+  wtfpl       permissive  WTFPL               Do What The F*** You Want License
+  zlib        permissive  Zlib                zlib License
+  bsl         permissive  BSL-1.0             Boost Software License 1.0
+  cc0         permissive  CC0-1.0             Creative Commons Zero 1.0
+  ccby4       permissive  CC-BY-4.0           Creative Commons Attribution 4.0
+  ccbysa4     copyleft    CC-BY-SA-4.0        Creative Commons BY-SA 4.0
+  mpl2        copyleft    MPL-2.0             Mozilla Public License 2.0
+  gpl2        copyleft    GPL-2.0-only        GNU General Public License v2
+  gpl3        copyleft    GPL-3.0-only        GNU General Public License v3
+  lgpl3       copyleft    LGPL-3.0-only       GNU Lesser General Public License v3
+  agpl3       copyleft    AGPL-3.0-only       GNU Affero General Public License v3
 ```
 
-## Licenses bundled (18)
+## Usage
 
-### Permissive
-| Key | SPDX | Name |
-|-----|------|------|
-| `mit` | `MIT` | MIT License |
-| `apache` | `Apache-2.0` | Apache License 2.0 (full text, all 9 sections) |
-| `isc` | `ISC` | ISC License |
-| `bsd3` | `BSD-3-Clause` | BSD 3-Clause ("New BSD") |
-| `bsd2` | `BSD-2-Clause` | BSD 2-Clause ("Simplified BSD") |
-| `bsd0` | `0BSD` | BSD Zero Clause (no-attribution BSD) |
-| `unlicense` | `Unlicense` | The Unlicense (public domain) |
-| `wtfpl` | `WTFPL` | Do What The F*** You Want |
-| `zlib` | `Zlib` | zlib License |
-| `bsl` | `BSL-1.0` | Boost Software License 1.0 |
-| `cc0` | `CC0-1.0` | Creative Commons Zero (public domain) |
-| `ccby4` | `CC-BY-4.0` | Creative Commons Attribution 4.0 |
+```text
+licenseme v2.0.4
+LICENSE generator + detector
 
-### Copyleft / weak copyleft
-| Key | SPDX | Name |
-|-----|------|------|
-| `ccbysa4` | `CC-BY-SA-4.0` | Creative Commons Attribution-ShareAlike 4.0 |
-| `mpl2` | `MPL-2.0` | Mozilla Public License 2.0 |
-| `gpl2` | `GPL-2.0-only` | GNU General Public License v2 |
-| `gpl3` | `GPL-3.0-only` | GNU General Public License v3 |
-| `lgpl3` | `LGPL-3.0-only` | GNU Lesser General Public License v3 |
-| `agpl3` | `AGPL-3.0-only` | GNU Affero General Public License v3 |
+Usage:
+  licenseme <license> [options]
+  licenseme --detect [path]
+  licenseme --update [path]
+  licenseme --list
 
-### Aliases
-Typed what you remember, not what the SPDX id is? It's fine:
-`apache-2.0 → apache`, `gpl-3.0 → gpl3`, `cc-by → ccby4`, `boost → bsl`, `public-domain → unlicense`, `0bsd → bsd0`, `mpl-2.0 → mpl2`.
+Licenses (18 total):
+  permissive:  mit, apache, isc, bsd3, bsd2, bsd0, unlicense, wtfpl, zlib, bsl, cc0, ccby4
+  copyleft:    ccbysa4, mpl2, gpl2, gpl3, lgpl3, agpl3
+  aliases:    apache-2.0, gpl-3.0, cc-by, bsd, boost, public-domain, 0bsd, …
 
-## Options
+Options:
+  -n, --name <name>     Author / copyright holder (default: "Your Name")
+  -y, --year <year>     Copyright year (default: current year)
+  -o, --output <path>   Write to file (default: ./LICENSE)
+  --stdout              Print to stdout instead of writing a file
+  --header              Emit a short copyright header instead of full text
+  --style <style>       Header comment style: jsblock, jsline, hash, html (default jsblock)
+  --file <file>         Filename to inline into the header (optional)
+  --detect [path]       Identify an existing LICENSE via SPDX tag or fingerprint
+  --update [path]       Bump copyright year in an existing LICENSE (in-place)
+  --spdx                Print the SPDX identifier for the picked license, then exit
+  --json                Emit a JSON envelope (for --generate, --detect, --list)
+  -l, --list            List every bundled license with SPDX id
+  -h, --help            Show this help
+  --version             Show version
 
-| Option | Description |
-|--------|-------------|
-| `-n, --name <name>` | Author / copyright holder |
-| `-y, --year <year>` | Copyright year (default: current year) |
-| `-o, --output <path>` | Write to this path (default: `./LICENSE`) |
-| `--stdout` | Print to stdout instead of writing a file |
-| `--header` | Emit a source-file copyright header with SPDX tag |
-| `--style <style>` | Header comment style: `jsblock`, `jsline`, `hash`, `html` |
-| `--file <name>` | Inline filename into the header (optional) |
-| `--detect [path]` | Identify an existing LICENSE (SPDX tag or fingerprint) |
-| `--update [path]` | Bump copyright year in place (`2023` → `2023-2026`) |
-| `--spdx` | Print the SPDX identifier and exit |
-| `--json` | Emit JSON (works with `--generate`, `--detect`, `--list`) |
-| `-l, --list` | List every bundled license |
-| `-h, --help` | Show help |
-| `--version` | Show version |
+Examples:
+  licenseme mit -n "Jane Doe"
+  licenseme apache-2.0 -n "Acme, Inc." -y 2026
+  licenseme gpl-3.0 -n "Linus Torvalds" --stdout
+  licenseme mit -n "Jane Doe" --header --style jsblock --file src/index.js
+  licenseme --detect ./LICENSE              # who am I licensed under?
+  licenseme --update ./LICENSE              # bump year: 2023 → 2023-2026
+  licenseme --list --json | jq '.[] | .spdx'
+  licenseme mit --spdx                     # prints "MIT" and exits
 
-## Features worth calling out
-
-### SPDX tags on generated files
-`licenseme mit -n "Jane" --header` gives you a block like:
-
-```js
-/*
- * src/index.js
- * Copyright (c) 2026 Jane
- * SPDX-License-Identifier: MIT
- *
- * Licensed under the MIT License. See LICENSE file for full text.
- */
+Docs and issues: https://github.com/voidd0/licenseme
 ```
 
-The `SPDX-License-Identifier:` line is the canonical way to mark source files per [spdx.dev](https://spdx.dev). Automated scanners (REUSE, ClearlyDefined, npm packages like `license-checker`) read it directly.
+## Notes
 
-### Detection: SPDX first, fingerprint fallback
-`--detect` runs two passes:
-1. Look for an explicit `SPDX-License-Identifier:` tag → 100% confidence.
-2. Tokenize the file, compare Jaccard similarity against every bundled template → confidence score.
-
-If confidence drops below 35%, it bails out instead of guessing. The source (`spdx-tag` vs `fingerprint`) is surfaced in the output so you can trust or double-check.
-
-### Year bump
-`licenseme --update` walks the `Copyright (c) 2023 …` / `Copyright © 2023 …` line and turns it into `Copyright (c) 2023-2026 …`. Idempotent, if the year is already current, it's a no-op.
-
-### JSON output
-Everything has a `--json` mode:
-```bash
-licenseme --list --json | jq '.[] | select(.spdx == "AGPL-3.0-only")'
-licenseme --detect ./LICENSE --json
-licenseme mit -n Jane --json
-```
-Great for CI / scripts that need license metadata without parsing CLI output.
-
-## Programmatic use
-
-```js
-const { generate, generateHeader, detect, updateYear, spdxId, list } =
-  require('@v0idd0/licenseme/src/generator');
-
-// Generate
-const licenseText = generate('mit', { name: 'Jane', year: 2026 });
-
-// Source-file header
-const header = generateHeader('mit', {
-  name: 'Jane',
-  style: 'jsblock',
-  file: 'src/index.js',
-});
-
-// Detect
-const existing = require('fs').readFileSync('./LICENSE', 'utf8');
-const detected = detect(existing);    // { key, spdx, name, confidence, source }
-
-// Bump year
-const updated = updateYear(existing, 2026);
-
-// SPDX
-spdxId('agpl-3.0');    // "AGPL-3.0-only"
-
-// Catalog
-list();                // [{ key, name, spdx, permissive }, ...]
-```
+Detection matches the text against the bundled licenses and prints a confidence figure, so treat it as a hint, not legal advice. `--update` changes the year in the copyright line of an existing LICENSE.
 
 ## License
 
-MIT © [vøiddo](https://voiddo.com/?ref=licenseme-studio-readme), no asterisks.
-
-## Links
-
-- Docs: https://tools.voiddo.com/licenseme/?ref=licenseme-docs-readme
-- Source: https://github.com/voidd0/licenseme
-- npm: https://npmjs.com/package/@v0idd0/licenseme
-- Studio: https://voiddo.com/?ref=licenseme-studio-readme
-- Issues: https://github.com/voidd0/licenseme/issues
-- Support: support@voiddo.com
+MIT, see [LICENSE](LICENSE).
 
 ---
 
-Maintained by v0idd0.
+Made by [vøiddo](https://voiddo.com/?src=gh). More command line tools: [voiddo.com/packages](https://voiddo.com/packages/?src=gh).
+We also run data scrapers for job boards, shops and ad libraries: [voiddo.com/scrapers](https://voiddo.com/scrapers/?src=gh).

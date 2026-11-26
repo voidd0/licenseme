@@ -1,4 +1,3 @@
-// licenseme — license generator. Free forever from vøiddo. https://voiddo.com/tools/licenseme/
 
 const licenses = require('./licenses');
 const { resolveAlias } = licenses;

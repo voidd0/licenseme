@@ -1,4 +1,3 @@
-// licenseme — license catalog. Free forever from vøiddo. https://voiddo.com/tools/licenseme/
 // SPDX identifiers follow https://spdx.org/licenses/. {year} and {name} are substituted at render time.
 
 const MIT = `MIT License

@@ -1,5 +1,3 @@
-// licenseme — tests. Free forever from vøiddo. https://voiddo.com/tools/licenseme/
-
 const {
   generate,
   generateHeader,
